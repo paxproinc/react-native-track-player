@@ -2,6 +2,7 @@ package com.doublesymmetry.trackplayer.service
 
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.os.*
 import android.support.v4.media.RatingCompat
 import androidx.annotation.MainThread
@@ -432,7 +433,8 @@ class MusicService : HeadlessJsTaskService() {
                 when (it) {
                     is NotificationState.POSTED -> startForeground(
                             it.notificationId,
-                            it.notification
+                            it.notification,
+                            ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK,
                     )
                     is NotificationState.CANCELLED -> stopForeground(true)
                 }
